@@ -1,6 +1,6 @@
-import './style.scss'
+import './style.scss';
 
-// Todos 
+// Todos
 // Projects
 // View / UI
 // Button interacts with tools
@@ -8,4 +8,4 @@ import './style.scss'
 // Notes are any text (REMEMBER TO SANITIZE)
 // To dos are title,  due date, color/importance
 // Expanding & Deleting To Dos
-// Storing To Do Lists on Local Storage 
+// Storing To Do Lists on Local Storage
