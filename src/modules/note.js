@@ -1,6 +1,6 @@
 // Model for a Note
-const Note = (parameters) => {
-    let textContent = ""
+const Note = ([contents = ""]) => {
+    let textContent = contents
     return {
         get textContent() {
             return textContent
