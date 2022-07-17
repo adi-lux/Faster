@@ -1,5 +1,4 @@
-import './style.scss';
-
+import "./style.scss";
 
 // Todos
 // Projects
@@ -10,4 +9,3 @@ import './style.scss';
 // To dos are title,  due date, color/importance
 // Expanding & Deleting To Dos
 // Storing To Do Lists on Local Storage
-

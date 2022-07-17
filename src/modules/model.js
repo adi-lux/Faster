@@ -1,7 +1,7 @@
-import ItemContainer from "./item-container";
-import Project from "./project";
-import Note from "./note";
-import ToDo from "./to-do";
+import ItemContainer from "./models/item-container";
+import Project from "./models/project";
+import Note from "./models/note";
+import ToDo from "./models/to-do";
 
 // Create A Container of All Projects.
 const Model = () => {
@@ -18,21 +18,21 @@ const Model = () => {
     return projectList.itemList[curProjIndex];
   };
   const switchProject = (name) => {
-    return projectList.getItemByName(name)
+    return projectList.getItemByName(name);
   };
   const addTool = (toolType, parameters) => {
     // get container for tool type in current project
-    let newTool
+    let newTool;
     if (toolType == "Note") {
-        newTool = Note(parameters)
+      newTool = Note(parameters);
     } else if (toolType == "ToDo") {
-        newTool = ToDo(parameters)
+      newTool = ToDo(parameters);
     }
     const curProject = projectList.itemList[curProjIndex];
     curProject.addItem(toolType, newTool);
   };
 
-  const removeTool = () => {};
+  const removeTool = (toolType, name) => {};
   const editTool = () => {};
   return {
     addProject,

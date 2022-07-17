@@ -34,7 +34,7 @@ const ItemContainer = (kind) => {
     addItem,
     removeItem,
     getLength,
-    getItem
+    getItem,
   };
 };
 

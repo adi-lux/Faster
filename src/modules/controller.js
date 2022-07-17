@@ -1,4 +1,1 @@
-const Controller = () => {
-
-    
-}
+const Controller = () => {};
