@@ -9,15 +9,59 @@
   <body>
     <script src="main.js" defer></script>
     <div id="container">
-      <header>FASTER</header>
+      <header>
+        <h1 class="title">FASTER</h1>
+      </header>
       <main>
         <div class="sidebar">
-          <div class="project-specific">todolist,notes</div>
-          <div class="project-list">default project</div>
+          <div class="project-specific">
+            <h2 class="show-name">Project Name</h2>
+            <h2 class="show-all">All</h2>
+            <h2 class="show-to-dos">To-Dos</h2>
+            <h2 class="show-notes">Notes</h2>
+          </div>
+          <div class="project-list">
+            <p class="project-title">Project 1</p>
+            <p class="project-title">Project 2</p>
+            <p class="project-title">Project 3</p>
+            <p class="project-title">Project 4</p>
+          </div>
         </div>
         <div class="content-side">
-          <div class="task-view"></div>
-          <div class="note-view"></div>
+          <div class="task-view">
+            <button class="add-task-button">+</button>
+            <div class="task">
+              <h3>task-1</h3>
+            </div>
+            <div class="task">
+              <h3>task-2</h3>
+            </div>
+            <div class="task">
+              <h3>task-3</h3>
+            </div>
+            <div class="task">
+              <h3>task-4</h3>
+            </div>
+          </div>
+          <div class="note-view">
+            <button class="add-note-button">+</button>
+            <div class="note">
+              <h3>note-1</h3>
+              <p>note-1</p>
+            </div>
+            <div class="note">
+              <h3>note-2</h3>
+              <p>note-2</p>
+            </div>
+            <div class="note">
+              <h3>note-3</h3>
+              <p>note-3</p>
+            </div>
+            <div class="note">
+              <h3>note-4</h3>
+              <p>note-4</p>
+            </div>
+          </div>
         </div>
       </main>
     </div>

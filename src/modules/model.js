@@ -4,54 +4,63 @@ import Note from "./models/note";
 import ToDo from "./models/to-do";
 
 // Create A Container of All Projects.
-const Model = () => {
+function Model() {
   const toolTypes = ["Note", "ToDo"];
   const projectList = ItemContainer("Project");
   let curProjIndex = 0; // index of the currentProject
   let projCounter = 0;
-  const getCurrentProject = () => projectList.itemList[curProjIndex]; //y
+  let observers = [];
+  const addObserver = (view) => {
+    observers.push(view);
+  };
 
+  const updateObservers = () => {
+    observers.forEach((observer) => {
+      observer.updateView(this);
+    });
+  };
+  // To Display the Current Project onto the Screen
+  const getCurrentProject = () => projectList.itemList[curProjIndex];
+
+  // To Add a project to the tab (do not switch to it.)
   const addProject = (projectName = `Project ${projCounter}`) => {
-    //y
     projectList.addItem(Project(projectName, toolTypes));
     projCounter++;
   };
 
+  // To Get a list of all x's and y's
   const getTypeNameList = (type) => {
-    //y
     const curr = getCurrentProject();
     return curr.getTypeNameList(type);
   };
 
   const getProjectByName = (projectName) => {
-    //y
     return projectList.getItemByName(projectName);
   };
 
   const getProjectIndexByName = (projectName) => {
-    //y
     return projectList.getItemIndexByName(projectName);
   };
+
+  // To delete a project
   const deleteProject = (projectName) => {
-    //y
     const projIndex = getProjectIndexByName(projectName);
     projectList.removeItem(projIndex);
   };
 
+  // To change any project's name
   const editProjectName = (originalName, newProjectName) => {
-    //y
     const editProj = getProjectByName(originalName);
     editProj.name = newProjectName;
   };
 
+  // When clicked, switch Project.
   const switchProject = (name) => {
-    //y
     curProjIndex = projectList.getItemIndexByName(name);
   };
 
+  // To add a new Tool
   const addTool = (toolType, parameters) => {
-    //y
-    // get container for tool type in current project
     let newTool;
     if (toolType === "Note") {
       newTool = Note(parameters);
@@ -62,22 +71,27 @@ const Model = () => {
     curProject.addItem(toolType, newTool);
   };
 
+  // To delete a tool
   const deleteTool = (toolType, name) => {
-    //y
     const curProj = getCurrentProject();
     curProj.deleteItem(toolType, name);
   };
 
+  // To change the contents of a tool
   const editTool = (toolType, name, parameters) => {
-    //y
     const curProj = getCurrentProject();
     curProj.editItem(toolType, name, parameters);
   };
 
+  addProject(); // initializes the project
+
   return {
     get projects() {
-      //y
       return projectList.itemList;
+    },
+    get names() {
+      const projects = projectList.itemList;
+      return projects.map((project) => project.name);
     },
     addProject,
     deleteProject,
@@ -88,7 +102,9 @@ const Model = () => {
     addTool,
     deleteTool,
     editTool,
+    updateObservers,
+    addObserver
   };
-};
+}
 
 export default Model;
