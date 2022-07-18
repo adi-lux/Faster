@@ -1,7 +1,8 @@
 // Model for a Note
-const Note = ([name, contents = ""]) => {
-  let noteName = name;
+const Note = ([givenName, contents]) => {
+  let name = givenName;
   let textContent = contents;
+
   return {
     get textContent() {
       return textContent;
@@ -9,8 +10,19 @@ const Note = ([name, contents = ""]) => {
     set textContent(newText) {
       textContent = newText;
     },
-    get noteName() {},
-    set noteName(newNoteName) {},
+    get name() {
+      return name;
+    },
+    set name(newNoteName) {
+      name = newNoteName;
+    },
+    get parameters() {
+      return [name, textContent];
+    },
+    set parameters([newName, newContents]) {
+      name = newName;
+      textContent = newContents;
+    },
   };
 };
 

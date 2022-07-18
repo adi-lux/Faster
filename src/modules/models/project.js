@@ -3,35 +3,44 @@
 
 import ItemContainer from "./item-container";
 
-const Project = (name, typeList) => {
+const Project = (givenName, typeList) => {
   // A Map of Containers
-  projectName = name;
-  containerMap = new Map();
+  let name = givenName;
+  const containerMap = new Map();
   typeList.forEach((type) => {
-    console.log(`container ${type}`);
     containerMap.set(type, ItemContainer(type));
   });
 
-  const _getTypeNameList = (type) => {
-    return containerMap.get(type);
-  };
+  const getTypeNameList = (type) => containerMap.get(type);
 
   const addItem = (type, item) => {
-    const typeContainer = _getTypeNameList(type);
+    const typeContainer = getTypeNameList(type);
     typeContainer.addItem(item);
   };
 
-  const deleteItem = (type, index) => {
-    const typeContainer = _getTypeNameList(type);
-    typeContainer.deleteItem(index);
+  const deleteItem = (type, itemName) => {
+    const typeContainer = getTypeNameList(type);
+    const deleteIndex = typeContainer.getItemIndexByName(itemName);
+    typeContainer.removeItem(deleteIndex);
+  };
+
+  const editItem = (type, itemName, parameters) => {
+    const typeContainer = getTypeNameList(type);
+    const editIndex = typeContainer.getItemIndexByName(itemName);
+    typeContainer.editItem(editIndex, parameters);
   };
 
   return {
-    get projectName() {
-      return projectName;
+    get name() {
+      return name;
+    },
+    set name(newName) {
+      name = newName;
     },
     addItem,
     deleteItem,
+    editItem,
+    getTypeNameList,
   };
 };
 

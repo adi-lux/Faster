@@ -1,27 +1,29 @@
 // You can contain ONE type of object (notes, to-dos, etc)
 const ItemContainer = (kind) => {
   const itemType = kind;
-  let itemList = [];
+  const itemList = [];
 
   const addItem = (itemToAdd) => {
-    console.log(`${itemToAdd} added`);
     itemList.push(itemToAdd);
   };
 
   const removeItem = (removeIndex) => {
-    console.log(`${removeIndex} index item removed.`);
     itemList.splice(removeIndex, 1);
   };
 
+  const getItemIndexByName = (name) => {
+    const itemIndex = itemList.findIndex((item) => item.name === name);
+    return itemIndex;
+  };
   const getItemByName = (name) => {
-    const itemIndex = itemList.findIndex((item) => {
-      return item.name === name;
-    });
+    const itemIndex = getItemIndexByName(name);
     return itemList[itemIndex];
   };
 
-  const getLength = () => {
-    return itemList.length;
+  const getLength = () => itemList.length;
+
+  const editItem = (editIndex, parameters) => {
+    itemList[editIndex].parameters = parameters;
   };
 
   return {
@@ -34,7 +36,9 @@ const ItemContainer = (kind) => {
     addItem,
     removeItem,
     getLength,
-    getItem,
+    getItemByName,
+    getItemIndexByName,
+    editItem,
   };
 };
 
