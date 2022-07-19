@@ -1,7 +1,7 @@
 // Model for a Project -> Projects can hold notes and to-dos
 // makes Separate containers for notes and to-dos : will have to do that multilpe times
 
-import ItemContainer from "./item-container";
+import ItemContainer from './item-container';
 
 const Project = (givenName, typeList) => {
   // A Map of Containers
@@ -25,10 +25,6 @@ const Project = (givenName, typeList) => {
   };
 
   const editItem = (type, itemName, parameters) => {
-    console.log("Project!");
-    console.log(type);
-    console.log(itemName);
-    console.log(parameters);
     const typeContainer = getTypeNameList(type);
     const editIndex = typeContainer.getItemIndexByName(itemName);
     typeContainer.editItem(editIndex, parameters);

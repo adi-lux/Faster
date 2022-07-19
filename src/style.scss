@@ -1,3 +1,9 @@
+
+@use 'styles/_header.scss';
+@use 'styles/_notes.scss';
+@use 'styles/_sidebar.scss';
+@use 'styles/_todos.scss';
+
 // We have to use @import or @use  for SASS
 :root, body {
     padding: 0;
@@ -13,6 +19,7 @@ header {
     grid-area: 1 / 1 / 2 / 2;
     display: flex;
     background-color: pink;
+
     .title {
         font-size: calc(2rem + 5px);
     }
@@ -41,20 +48,23 @@ main {
     .todo-view {
         display: grid;
     }
+
     .note-view {
         display: grid;
         grid-template-rows: repeat(auto-fit, 1fr);
         grid-template-columns: repeat(3, 1fr);
         gap: 1vmin;
+
         .add-note-button {
             grid-area: 1 / 1 / 2 / 4;
-            /*background: transparent;
+
+            /* background: transparent;
             border: transparent;
             width: fit-content;
             height: fit-content;
             align-self: center;
             justify-self: end;
-            box-shadow: 0 0  35px rgb(8, 0, 0);*/
+            box-shadow: 0 0  35px rgb(8, 0, 0); */
         }
 
         .note {

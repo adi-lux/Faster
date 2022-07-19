@@ -1,30 +1,28 @@
-function TodoView() {
-
-  const observerName = "ToDo";
-
+function TodoView(todoController) {
+  const controller = todoController;
+  const observerName = 'ToDo';
 
   const buildView = (givenTodoList) => {
-    const newTodoView = document.createElement("div");
-    newTodoView.className = "todo-view";
+    const newTodoView = document.createElement('div');
+    newTodoView.className = 'todo-view';
     givenTodoList.forEach((todo) => {
-      const [todoName, todoDescription, todoDueDate, todoPriority] =
-        todo.parameters;
-      const tdHolder = document.createElement("div");
-      tdHolder.className = "todo";
+      const [todoName, todoDescription, todoDueDate, todoPriority] = todo.parameters;
+      const tdHolder = document.createElement('div');
+      tdHolder.className = 'todo';
 
-      const tdNameHeader = document.createElement("h3");
+      const tdNameHeader = document.createElement('h3');
       tdNameHeader.textContent = todoName;
       tdHolder.appendChild(tdNameHeader);
 
-      const tdDescription = document.createElement("p");
+      const tdDescription = document.createElement('p');
       tdDescription.textContent = todoDescription;
       tdHolder.appendChild(tdDescription);
 
-      const tdDueDate = document.createElement("p");
+      const tdDueDate = document.createElement('p');
       tdDueDate.textContent = todoDueDate;
       tdHolder.appendChild(tdDueDate);
 
-      const tdPriority = document.createElement("p");
+      const tdPriority = document.createElement('p');
       tdPriority.textContent = todoPriority;
       tdHolder.appendChild(tdPriority);
 
@@ -34,15 +32,15 @@ function TodoView() {
   };
 
   const updateView = (model) => {
-    const todoContainer = model.getTypeNameList("ToDo");
+    const todoContainer = model.getTypeNameList('ToDo');
     const todoList = todoContainer.itemList;
     const newTodoView = buildView(todoList);
-    const todoView = document.querySelector("div.todo-view");
-    const contentSide = document.querySelector("div.content-side");
-    contentSide.replaceChild(todoView, newTodoView);
+    const todoView = document.querySelector('div.todo-view');
+    const contentSide = document.querySelector('div.content-side');
+    // contentSide.replaceChild(todoView, newTodoView);
   };
 
-  return { get observerName() {return observerName},buildView, updateView };
+  return { get observerName() { return observerName; }, buildView, updateView };
 }
 
 export default TodoView;
