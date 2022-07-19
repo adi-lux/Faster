@@ -14,7 +14,7 @@ function NotesView(noteController) {
     noteName.type = 'text';
 
     const noteContent = document.createElement('input');
-    noteContent.type = 'textarea';
+    noteContent.type = 'text';
 
     const noteButton = document.createElement('input');
     noteButton.type = 'button';
@@ -68,6 +68,8 @@ function NotesView(noteController) {
     const deleteButtons = document.querySelectorAll('.delete-note-button');
     deleteButtons.forEach((button) => button.addEventListener('click', controller.deleteNote));
     editButtons.forEach((button) => button.addEventListener('click', editNoteView));
+    const taskButton = document.querySelector('button.add-note-button');
+    taskButton.addEventListener('click', addNoteView);
   };
 
   const buildView = (givenNoteList) => {
@@ -77,10 +79,13 @@ function NotesView(noteController) {
       const [noteName, noteContent] = note.parameters;
       const noteHolder = document.createElement('form');
       noteHolder.className = 'note';
+
       const noteNameHeader = document.createElement('h3');
       noteNameHeader.textContent = noteName;
+
       const noteNameContent = document.createElement('p');
       noteNameContent.textContent = noteContent;
+
       const editButton = document.createElement('input');
       editButton.type = 'button';
       editButton.className = 'edit-note-button';
@@ -97,6 +102,11 @@ function NotesView(noteController) {
       noteHolder.appendChild(deleteButton);
       newNoteView.appendChild(noteHolder);
     });
+
+    const addNoteViewButton = document.createElement('button');
+    addNoteViewButton.className = 'add-note-button';
+    addNoteViewButton.textContent = '+';
+    newNoteView.appendChild(addNoteViewButton);
     return newNoteView.cloneNode(true);
   };
 
@@ -108,17 +118,13 @@ function NotesView(noteController) {
       node.remove();
     });
     const newNoteView = buildView(noteList);
-    const contentSide = document.querySelector('div.todo-view');
-    contentSide.appendChild(newNoteView);
+    const contentSide = document.querySelector('div.note-view');
+    const contentView = document.querySelector('.content-side');
+    contentView.replaceChild(newNoteView, contentSide);
     updateEventHandlers();
   };
 
-  const instantiate = () => {
-    const taskButton = document.querySelector('button.add-note-button');
-    taskButton.addEventListener('click', addNoteView);
-  };
-
-  instantiate();
+  updateEventHandlers();
 
   return {
     get observerName() {

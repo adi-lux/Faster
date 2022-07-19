@@ -31,10 +31,10 @@ function Model() {
   const getCurrentProjectName = () => getCurrentProject().name;
   // To Add a project to the tab (do not switch to it.)
   const addProject = (projectName = `Project ${projCounter}`) => {
-    const newProject = Project(projectName, toolTypes)
+    const newProject = Project(projectName, toolTypes);
     projectList.addItem(newProject);
     projCounter += 1;
-    return newProject
+    return newProject;
   };
 
   // To Get a list of all x's and y's
@@ -55,7 +55,8 @@ function Model() {
       curProjIndex = 0;
     }
     if (projectList.length === 0) {
-      projCounter = 0
+      projCounter = 0;
+      curProjIndex = 0;
       addProject();
     }
   };

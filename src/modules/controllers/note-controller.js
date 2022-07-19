@@ -16,7 +16,6 @@ const NoteController = (givenModel) => {
     const properties = [e.target.form[0].value, e.target.form[1].value];
     const noteName = e.target.form[3].value;
     model.editTool('Note', noteName, properties);
-    model.updateObserver('Note', model);
     update();
   };
   const deleteNote = (e) => {

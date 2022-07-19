@@ -1,17 +1,13 @@
-
 function ProjectsView(projectController) {
   const controller = projectController;
   const observerName = 'Project';
 
-  
-
-  const getParentNote = (e) => e.target.parentElement;
-  const getNoteContents = (e, index) => getParentNote(e).children[index].textContent;
-
+  const getParentProject = (e) => e.target.parentElement;
+  const getProjContents = (e, index) => getParentProject(e).children[index].textContent;
 
   const editProjectView = (e) => {
-    e.preventDefault()
-    const editProjectName = getNoteContents(e, 0);
+    e.preventDefault();
+    const editProjectName = getProjContents(e, 0);
     const projectWindow = document.createElement('div');
     projectWindow.className = 'edit-proj-window';
     const projForm = document.createElement('form');
@@ -24,26 +20,23 @@ function ProjectsView(projectController) {
     hiddenOriginal.type = 'hidden';
     hiddenOriginal.value = editProjectName;
 
-
-
     projName.addEventListener('keydown', controller.editProjectName);
     projForm.appendChild(projName);
     projForm.appendChild(hiddenOriginal);
     projectWindow.appendChild(projForm);
-    getParentNote(e).replaceChildren(projForm);
+    getParentProject(e).replaceChildren(projForm);
   };
 
-  const addNewProjectView = (e) => {
-    const newProj = controller.addProject()
-
-
-
-  }
+  const addNewProjectView = () => {
+    controller.addProject();
+  };
 
   const updateEventHandlers = () => {
     const switchProjects = document.querySelectorAll('.project-heading');
-    switchProjects.forEach((project) => project.addEventListener('click', controller.switchProject));
-    switchProjects.forEach((project) => project.addEventListener('contextmenu', editProjectView))
+    switchProjects.forEach((project) => {
+      project.addEventListener('click', controller.switchProject);
+      project.addEventListener('contextmenu', editProjectView);
+    });
     const deleteProjects = document.querySelectorAll('.delete-project-button');
     deleteProjects.forEach((project) => {
       project.addEventListener('click', controller.deleteProject);
@@ -71,7 +64,9 @@ function ProjectsView(projectController) {
 
   const updateView = (model) => {
     const projectNames = model.names;
-    const projView = document.querySelectorAll('.add-project-button, .project-list, .project-title');
+    const projView = document.querySelectorAll(
+      '.add-project-button, .project-list, .project-title',
+    );
     projView.forEach((node) => {
       node.remove();
     });
@@ -79,15 +74,14 @@ function ProjectsView(projectController) {
     const sideBar = document.querySelector('.sidebar');
     sideBar.appendChild(newProjView);
 
-    const addProjectButton = document.createElement('button')
-    addProjectButton.textContent = "Add Project"
-    addProjectButton.className = "add-project-button"
-    addProjectButton.addEventListener("click", addNewProjectView)
-    sideBar.appendChild(addProjectButton)
+    const addProjectButton = document.createElement('button');
+    addProjectButton.textContent = 'Add Project';
+    addProjectButton.className = 'add-project-button';
+    addProjectButton.addEventListener('click', addNewProjectView);
+    sideBar.appendChild(addProjectButton);
     updateEventHandlers();
     const currentNameHeader = document.querySelector('.show-name');
-    currentNameHeader.textContent = model.getCurrentProjectName()
-    
+    currentNameHeader.textContent = model.getCurrentProjectName();
   };
 
   return {
