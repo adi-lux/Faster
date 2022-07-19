@@ -1,7 +1,7 @@
 import ItemContainer from "./models/item-container";
 import Project from "./models/project";
 import Note from "./models/note";
-import ToDo from "./models/to-do";
+import ToDo from "./models/todo";
 
 // Create A Container of All Projects.
 function Model() {
@@ -10,15 +10,24 @@ function Model() {
   let curProjIndex = 0; // index of the currentProject
   let projCounter = 0;
   let observers = [];
-  const addObserver = (view) => {
-    observers.push(view);
+  const addObservers = (views) => {
+    views.forEach( (observer) => {
+      observers.push(observer)
+    })
   };
 
-  const updateObservers = () => {
+  function updateObservers(model) {
     observers.forEach((observer) => {
-      observer.updateView(this);
+      observer.updateView(model);
     });
   };
+
+  const updateObserver = (givenObserverName, model) => {
+    const index = observers.findIndex(observer => observer.observerName === givenObserverName)
+    console.log(model);
+    observers[index].updateView(model)
+    
+  }
   // To Display the Current Project onto the Screen
   const getCurrentProject = () => projectList.itemList[curProjIndex];
 
@@ -73,6 +82,7 @@ function Model() {
 
   // To delete a tool
   const deleteTool = (toolType, name) => {
+    console.log(name);
     const curProj = getCurrentProject();
     curProj.deleteItem(toolType, name);
   };
@@ -103,7 +113,8 @@ function Model() {
     deleteTool,
     editTool,
     updateObservers,
-    addObserver
+    addObservers,
+    updateObserver
   };
 }
 
