@@ -23,6 +23,9 @@ const ItemContainer = (kind) => {
   const getLength = () => itemList.length;
 
   const editItem = (editIndex, parameters) => {
+    console.log("Container!");
+    console.log(editIndex);
+    console.log(parameters);
     itemList[editIndex].parameters = parameters;
   };
 

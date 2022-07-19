@@ -90,6 +90,10 @@ function Model() {
   // To change the contents of a tool
   const editTool = (toolType, name, parameters) => {
     const curProj = getCurrentProject();
+    console.log("Model!");
+    console.log(toolType);
+    console.log(name);
+    console.log(parameters);
     curProj.editItem(toolType, name, parameters);
   };
 

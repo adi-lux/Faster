@@ -10,7 +10,7 @@ const Controller = (givenModel) => {
   const noteController = NoteController(model)
   const todoController = TodoController(model)
   const projectController = ProjectController(model)
-
+  model.updateObservers(model)
 
   return {
     get model() {

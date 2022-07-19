@@ -1,6 +1,9 @@
 const NoteController = (givenModel) => {
   const model = givenModel;
-
+  
+  const getParentNote = (e) => {
+    return e.target.parentElement
+  }
   const getNoteName = (e) => {
     return e.target.parentElement.children[0].textContent
   }
@@ -9,31 +12,26 @@ const NoteController = (givenModel) => {
     model.updateObserver("Note", model)
   }
   const addNote = (e) => {
-    // update Model
-    // call update on view
-
     e.preventDefault();
     const properties = [e.target.form[0].value, e.target.form[1].value]
     model.addTool("Note", properties)
     update()
   }
   const editNote = (e) => {
-    // update Model
-    // call update on view
+
     const properties = [e.target.form[0].value, e.target.form[1].value]
-    const noteName = getNoteName(e)
+    const noteName = e.target.form[3].value
     model.editTool("Note", noteName, properties)
     model.updateObserver("Note", model)
     update()
   }
   const deleteNote = (e) => {
-    // update Model
-    // call update on view
+
     const noteName = getNoteName(e)
     model.deleteTool("Note", noteName)
     update()
-
   }
+  
   return {
     get model() {
       return model;

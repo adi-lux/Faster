@@ -3,16 +3,23 @@ function NotesView(noteController) {
 
   const observerName = "Note";
 
+  const getParentNote = (e) => {
+    return e.target.parentElement
+  }
+  const getNoteContents = (e, index) => {
+    return getParentNote(e).children[index].textContent
+  }
   const addNoteView = () => {
     const noteWindow = document.createElement("div");
     noteWindow.className = "add-note-window";
     const noteForm = document.createElement("form");
-    //const noteNameLabel = document.createElement("label")
+
     const noteName = document.createElement("input");
     noteName.type = "text";
-    //const noteContentLabel = document.createElement("label")
+
     const noteContent = document.createElement("input");
     noteContent.type = "textarea";
+
     const noteButton = document.createElement("input");
     noteButton.type = "button";
 
@@ -26,22 +33,50 @@ function NotesView(noteController) {
     container.appendChild(noteWindow);
   };
 
-  const editNoteView = () => {
-    
+  const editNoteView = (e) => {
+    const editNoteName = getNoteContents(e, 0)
+    const editNoteContent = getNoteContents(e,1)
+    const noteWindow = document.createElement("div");
+    noteWindow.className = "edit-note-window";
+    const noteForm = document.createElement("form");
+    const noteName = document.createElement("input");
+    noteName.type = "text";
+    noteName.value = editNoteName
+    const noteContent = document.createElement("input");
+    noteContent.type = "textarea";
+    noteContent.value = editNoteContent
+    const noteButton = document.createElement("input");
+    noteButton.type = "button";
+    noteButton.value = "edit";
+    noteButton.className = "trueEditButton"
+
+
+    const hiddenOriginal = document.createElement("input");
+    hiddenOriginal.type = "hidden"
+    hiddenOriginal.value = editNoteName
+
+    noteButton.addEventListener("click", controller.editNote);
+    noteForm.appendChild(noteName);
+    noteForm.appendChild(noteContent);
+    noteForm.appendChild(noteButton);
+    noteForm.appendChild(hiddenOriginal)
+    noteWindow.appendChild(noteForm);
+    getParentNote(e).replaceChildren(noteForm)
   }
   const updateEventHandlers = () => {
       
     const editButtons = document.querySelectorAll(".edit-note-button")
     const deleteButtons = document.querySelectorAll(".delete-note-button") 
     deleteButtons.forEach(button => button.addEventListener("click", controller.deleteNote))
-    editButtons.forEach(button => button.addEventListener("click", controller.editNote))
+    editButtons.forEach(button => button.addEventListener("click", editNoteView))
   };
+
   const buildView = (givenNoteList) => {
     const newNoteView = document.createElement("div");
     newNoteView.className = "note-view";
     givenNoteList.forEach((note) => {
       const [noteName, noteContent] = note.parameters;
-      const noteHolder = document.createElement("div");
+      const noteHolder = document.createElement("form");
       noteHolder.className = "note";
       const noteNameHeader = document.createElement("h3");
       noteNameHeader.textContent = noteName;
@@ -54,7 +89,7 @@ function NotesView(noteController) {
       
       const deleteButton = document.createElement("input");
       deleteButton.value = "delete";
-      editButton.type = "button"
+      deleteButton.type = "button"
       deleteButton.className = "delete-note-button"
 
       //buton for

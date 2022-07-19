@@ -25,6 +25,10 @@ const Project = (givenName, typeList) => {
   };
 
   const editItem = (type, itemName, parameters) => {
+    console.log("Project!");
+    console.log(type);
+    console.log(itemName);
+    console.log(parameters);
     const typeContainer = getTypeNameList(type);
     const editIndex = typeContainer.getItemIndexByName(itemName);
     typeContainer.editItem(editIndex, parameters);
