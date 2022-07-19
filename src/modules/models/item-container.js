@@ -33,6 +33,9 @@ const ItemContainer = (kind) => {
     get itemType() {
       return itemType;
     },
+    get length() {
+      return itemList.length;
+    },
     addItem,
     removeItem,
     getLength,

@@ -1,10 +1,12 @@
-import Model from "./modules/model";
-import ViewController from "./modules/view-controller"
-import "./style.scss";
+import Model from './modules/model';
+import Controller from './modules/controller';
+import View from './modules/view';
+import './style.scss';
 
 const main = () => {
   const model = Model();
-  const viewController = ViewController(model)
+  const controller = Controller(model);
+  View(controller);
 };
 
 main();
