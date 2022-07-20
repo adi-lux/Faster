@@ -1,10 +1,6 @@
-// Model for a Project -> Projects can hold notes and to-dos
-// makes Separate containers for notes and to-dos : will have to do that multilpe times
-
 import ItemContainer from './item-container';
 
 const Project = (givenName, typeList) => {
-  // A Map of Containers
   let name = givenName;
   const containerMap = new Map();
   typeList.forEach((type) => {

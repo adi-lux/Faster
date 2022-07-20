@@ -1,10 +1,8 @@
-// Model for a To-Do
-
 const ToDo = ([newName, newDescription, newDueDate, newPriority]) => {
-  let name = newName; // Placeholder will be in HTML
-  let description = newDescription; // Placeholder will be in HTML
-  let dueDate = newDueDate; // will implement a time library later.
-  let priority = newPriority; // maybe an ENUM that represents variables by priority
+  let name = newName;
+  let description = newDescription;
+  let dueDate = newDueDate;
+  let priority = newPriority;
 
   return {
     get name() {

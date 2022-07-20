@@ -33,9 +33,7 @@ const TodoController = (givenModel) => {
     model.deleteTool('ToDo', todoName);
     update();
   };
-  const expandTodo = () => {
-
-  };
+  const expandTodo = () => {};
   return {
     get model() {
       return model;

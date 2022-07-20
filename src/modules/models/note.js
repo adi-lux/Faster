@@ -1,4 +1,3 @@
-// Model for a Note
 const Note = ([givenName, contents]) => {
   let name = givenName;
   let textContent = contents;

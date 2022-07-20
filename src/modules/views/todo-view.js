@@ -3,8 +3,7 @@ function TodoView(todoController) {
   const observerName = 'ToDo';
 
   const getParentTodo = (e) => e.target.parentElement;
-  const getTodoContents = (e, index) =>
-    getParentTodo(e).children[index].textContent;
+  const getTodoContents = (e, index) => getParentTodo(e).children[index].textContent;
 
   const addTodoView = () => {
     const todoWindow = document.createElement('div');
@@ -177,12 +176,8 @@ function TodoView(todoController) {
     const deleteButtons = document.querySelectorAll('.delete-todo-button');
     const expandButtons = document.querySelectorAll('.expand-todo-button');
     const shrinkButtons = document.querySelectorAll('.shrink-todo-button');
-    deleteButtons.forEach((button) =>
-      button.addEventListener('click', controller.deleteTodo)
-    );
-    editButtons.forEach((button) =>
-      button.addEventListener('click', editTodoView)
-    );
+    deleteButtons.forEach((button) => button.addEventListener('click', controller.deleteTodo));
+    editButtons.forEach((button) => button.addEventListener('click', editTodoView));
     expandButtons.forEach((button) => {
       button.addEventListener('click', expandTodoView);
     });

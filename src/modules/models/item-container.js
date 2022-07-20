@@ -1,4 +1,3 @@
-// You can contain ONE type of object (notes, to-dos, etc)
 const ItemContainer = (kind) => {
   const itemType = kind;
   const itemList = [];
