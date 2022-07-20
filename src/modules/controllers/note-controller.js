@@ -3,25 +3,25 @@ const NoteController = (givenModel) => {
 
   const getNoteName = (e) => e.target.parentElement.children[0].textContent;
 
-  const update = () => {
+  const updateModel = () => {
     model.updateObserver('Note', model);
   };
   const addNote = (e) => {
     e.preventDefault();
     const properties = [e.target.form[0].value, e.target.form[1].value];
     model.addTool('Note', properties);
-    update();
+    updateModel();
   };
   const editNote = (e) => {
     const properties = [e.target.form[0].value, e.target.form[1].value];
     const noteName = e.target.form[3].value;
     model.editTool('Note', noteName, properties);
-    update();
+    updateModel();
   };
   const deleteNote = (e) => {
     const noteName = getNoteName(e);
     model.deleteTool('Note', noteName);
-    update();
+    updateModel();
   };
 
   return {

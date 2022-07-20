@@ -1,29 +1,37 @@
 const ProjectController = (givenModel) => {
   const model = givenModel;
-  const update = () => {
+  const updateModel = () => {
     model.updateObserver('Project', model);
   };
+  const updateModelFull = () => {
+    model.updateObservers(model);
+  };
   const addProject = () => {
-    const newProject = model.addProject();
-    update();
-    return newProject;
+    if (model.names.length > 15) {
+      return;
+    }
+    model.addProject();
+    updateModel();
   };
   const editProjectName = (e) => {
-    if (e.key === 'Enter') {
+    if (e.target.size < 16) {
+      e.target.size = e.target.form[0].value.length;
+    }
+    if (e.key === 'Enter' || e.key === undefined) {
       e.preventDefault();
       const newName = e.target.form[0].value;
       const oldName = e.target.form[1].value;
       model.editProjectName(oldName, newName);
-      update();
+      updateModel();
     }
   };
   const deleteProject = (e) => {
     model.deleteProject(e.target.parentNode.children[0].textContent);
-    model.updateObservers(model);
+    updateModelFull();
   };
   const switchProject = (e) => {
     model.switchProject(e.target.textContent);
-    model.updateObservers(model);
+    updateModelFull();
   };
   return {
     get model() {

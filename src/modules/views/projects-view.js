@@ -11,19 +11,25 @@ function ProjectsView(projectController) {
     const projectWindow = document.createElement('div');
     projectWindow.className = 'edit-proj-window';
     const projForm = document.createElement('form');
+    projForm.className = 'edit-title';
 
     const projName = document.createElement('input');
     projName.type = 'text';
     projName.value = editProjectName;
+    projName.className = 'project-heading'
+    projName.size = editProjectName.length;
+    projName.maxLength = 15;
 
     const hiddenOriginal = document.createElement('input');
     hiddenOriginal.type = 'hidden';
     hiddenOriginal.value = editProjectName;
 
     projName.addEventListener('keydown', controller.editProjectName);
+    projName.addEventListener('focusout', controller.editProjectName);
     projForm.appendChild(projName);
     projForm.appendChild(hiddenOriginal);
     projectWindow.appendChild(projForm);
+    
     getParentProject(e).replaceChildren(projForm);
   };
 
@@ -52,7 +58,7 @@ function ProjectsView(projectController) {
       const newName = document.createElement('h3');
       newName.className = 'project-heading';
       newName.textContent = projectName;
-      const deleteProjectButton = document.createElement('p');
+      const deleteProjectButton = document.createElement('button');
       deleteProjectButton.textContent = 'X';
       deleteProjectButton.className = 'delete-project-button';
       newList.appendChild(newName);

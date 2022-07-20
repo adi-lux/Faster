@@ -198,7 +198,7 @@ function TodoView(todoController) {
 
     const addTodoViewButton = document.createElement('button');
     addTodoViewButton.className = 'add-todo-button';
-    addTodoViewButton.textContent = '+';
+    addTodoViewButton.textContent = 'Add To-Do';
     newTodoView.appendChild(addTodoViewButton);
     return newTodoView.cloneNode(true);
   };

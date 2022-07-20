@@ -91,7 +91,6 @@ function Model() {
   };
 
   addProject();
-  addProject();
   return {
     get projects() {
       return projectList.itemList;

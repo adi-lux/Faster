@@ -3,72 +3,244 @@
 @use 'styles/_sidebar.scss';
 @use 'styles/_todos.scss';
 
+$primary-color: #2d3142;
+$secondary-color: #4f5d75;
+$ternary-color: #ef8354;
+$light-text-color: aliceblue;
+$dark-text-color: black;
+$title-font-size: calc(5px + 1rem);
+$content-font-size: calc(5px + 0.5rem);
+
+%action-button {
+  background-color: $ternary-color;
+  font-weight: bolder;
+  color: $light-text-color;
+  font-size: $title-font-size;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  width: 100%;
+  text-align: center;
+  &:hover {
+    color: $primary-color;
+  }
+  &:active {
+    box-shadow: 0px 2px 2px rgba($primary-color, 0.5);
+
+  }
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+}
+
 // We have to use @import or @use  for SASS
 :root,
 body {
   padding: 0;
   margin: 0;
   height: 100vh;
-  background-color: aliceblue;
+  background-color: $light-text-color;
+}
+
+input,
+textarea {
+  border-radius: 2px;
+  border: transparent;
+  resize: none;
+  background-color: $secondary-color;
 }
 
 #container {
   display: grid;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: 1fr 10fr;
+  height: 100%;
 }
 
 header {
   grid-area: 1 / 1 / 2 / 2;
+  background-color: $primary-color;
   display: flex;
-  background-color: pink;
+  align-items: flex-end;
 
   .title {
-    font-size: calc(2rem + 5px);
+    margin: 0;
+    font-size: calc(4rem + 5px);
+    color: $ternary-color;
   }
+  padding: 10px;
+  box-shadow: 0px 2px 2px rgba($secondary-color, 0.5);
+
 }
 
 main {
   grid-area: 2 / 1 / 3 / 2;
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 225px 5fr;
+  height: 100%;
+
 }
 
 .sidebar {
+    height: 100%;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  border-right: 1px solid black;
+  grid-template-rows: 75px 1fr 50px;
+  background-color: $secondary-color;
+  color: $light-text-color;
+  text-align: center;
+  padding: 10px;
+  gap: 10px;
+  width: 225px;
+  box-shadow: 0px 0px 2px rgb(16, 37, 40);
+
+  
+  input,.project-title {
+    &:hover,
+    &:focus {
+      background-color: $primary-color;
+    }
+  }
+  .show-name {
+    max-width: 205px;
+  }
+  .project-list {
+    padding-top: 5px;
+
+    display: grid;
+    grid-template-rows: repeat(auto-fit, clamp(25px, 4vh, 50px));
+    gap: clamp(2px, 5px, 10px);
+    width: 100%;
+  }
+
+  .project-title {
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+    place-items: center;
+    max-width: 220px;
+    .edit-title > input {
+      color: $ternary-color;
+    }
+
+    .project-heading {
+      grid-column: 1 / 2;
+      font-weight: bold;
+      max-width: 150px;
+      height: fit-content;
+      font-size: 1.17em;
+      text-align: start;
+      display: block;
+    }
+    .delete-project-button,
+    .edit-project-button {
+      grid-column: 2 / 3;
+      font-weight: bold;
+      @extend %action-button;
+      padding: 0 5px;
+      justify-self: center;
+      max-height: fit-content;
+      max-width: fit-content;
+      font-size: 1rem;
+    }
+  }
+  .add-project-button {
+    @extend %action-button;
+  }
+
+  .edit-content {
+    max-width: 150px;
+  }
 }
 
 .content-side {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
 
   .todo-view {
     display: grid;
+    grid-template-rows: 1fr 10fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1vmin;
+    padding: 10px;
+    .add-todo-button {
+      grid-area: 1 / 1 / 2 / 4;
+
+      @extend %action-button;
+    }
   }
 
   .note-view {
     display: grid;
-    grid-template-rows: repeat(auto-fit, 1fr);
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1vmin;
-
+    grid-template-rows: 1fr 10fr;
+    padding: 10px;
+    gap: 5px;
     .add-note-button {
-      grid-area: 1 / 1 / 2 / 4;
-      background: transparent;
-      border: transparent;
-      width: fit-content;
-      height: fit-content;
-      align-self: flex-start;
-      justify-self: end;
+      grid-area: 1 / 1 / 2 / 5;
+      @extend %action-button;
     }
 
-    .note {
+    .note,
+    .add-note-window {
       place-self: center;
-      background-color: antiquewhite;
-      height: 200px;
+      background-color: $primary-color;
+      height: 250px;
       width: 200px;
+      justify-items: stretch;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 6fr 1fr;
+      padding: 10px;
+      gap: 4px;
+      border-radius: 4px;
+
+      * {
+        color: $light-text-color;
+      }
+
+      form {
+        grid-area: 1 / 1 / 4 / 3;
+        display: grid;
+        grid-template-rows: 1fr 6fr 1fr;
+        place-items: center;
+        gap: 5%;
+
+        .input-note-name, .edit-note-name {
+          text-align: center;
+          font-size: $title-font-size;
+          font-weight: bold;
+          width: 100%;
+        }
+        .input-note-content, .edit-note-content {
+          height: 100%;
+          width: 100%;
+        }
+        .input-note-button {
+          width: 100%;
+          @extend %action-button;
+        }
+      }
+
+      h3 {
+        grid-area: 1 / 1 / 2 / 3;
+        text-align: center;
+        word-break: break-all;
+
+        font-size: $title-font-size;
+      }
+      p {
+        word-break: break-all;
+        grid-area: 2 / 1 / 3 / 3;
+        width: 100%;
+      }
+
+      .edit-note-button,
+      .true-edit-button,
+      .delete-note-button {
+        @extend %action-button;
+      }
     }
   }
 }

@@ -5,20 +5,25 @@ function NotesView(noteController) {
 
   const getParentNote = (e) => e.target.parentElement;
   const getNoteContents = (e, index) => getParentNote(e).children[index].textContent;
-  const addNoteView = () => {
+  const addNoteView = (e) => {
+    e.target.disabled = true;
     const noteWindow = document.createElement('div');
     noteWindow.className = 'add-note-window';
     const noteForm = document.createElement('form');
 
     const noteName = document.createElement('input');
     noteName.type = 'text';
+    noteName.className = 'input-note-name'
+    noteName.required = true;
 
-    const noteContent = document.createElement('input');
-    noteContent.type = 'text';
-
+    const noteContent = document.createElement('textarea');
+    noteContent.className = 'input-note-content'
+    noteContent.required = true;
+   
     const noteButton = document.createElement('input');
     noteButton.type = 'button';
     noteButton.value = 'Add';
+    noteButton.className = 'input-note-button'
 
     noteButton.addEventListener('click', controller.addNote);
     noteForm.appendChild(noteName);
@@ -40,15 +45,16 @@ function NotesView(noteController) {
     const noteName = document.createElement('input');
     noteName.type = 'text';
     noteName.value = editNoteName;
+    noteName.className = 'edit-note-name';
 
-    const noteContent = document.createElement('input');
-    noteContent.type = 'textarea';
+    const noteContent = document.createElement('textarea');
     noteContent.value = editNoteContent;
+    noteContent.className = 'edit-note-content';
 
     const noteButton = document.createElement('input');
     noteButton.type = 'button';
     noteButton.value = 'edit';
-    noteButton.className = 'trueEditButton';
+    noteButton.className = 'true-edit-button';
 
     const hiddenOriginal = document.createElement('input');
     hiddenOriginal.type = 'hidden';
@@ -105,7 +111,7 @@ function NotesView(noteController) {
 
     const addNoteViewButton = document.createElement('button');
     addNoteViewButton.className = 'add-note-button';
-    addNoteViewButton.textContent = '+';
+    addNoteViewButton.textContent = 'Add Note';
     newNoteView.appendChild(addNoteViewButton);
     return newNoteView.cloneNode(true);
   };

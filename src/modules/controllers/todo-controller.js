@@ -3,7 +3,7 @@ const TodoController = (givenModel) => {
 
   const getTodoName = (e) => e.target.parentElement.children[0].textContent;
 
-  const update = () => {
+  const updateModel = () => {
     model.updateObserver('ToDo', model);
   };
   const addTodo = (e) => {
@@ -15,7 +15,7 @@ const TodoController = (givenModel) => {
       e.target.form[3].value,
     ];
     model.addTool('ToDo', properties);
-    update();
+    updateModel();
   };
   const editTodo = (e) => {
     const properties = [
@@ -26,14 +26,13 @@ const TodoController = (givenModel) => {
     ];
     const todoName = e.target.form[5].value;
     model.editTool('ToDo', todoName, properties);
-    update();
+    updateModel();
   };
   const deleteTodo = (e) => {
     const todoName = getTodoName(e);
     model.deleteTool('ToDo', todoName);
-    update();
+    updateModel();
   };
-  const expandTodo = () => {};
   return {
     get model() {
       return model;
@@ -41,7 +40,6 @@ const TodoController = (givenModel) => {
     addTodo,
     editTodo,
     deleteTodo,
-    expandTodo,
   };
 };
 export default TodoController;
