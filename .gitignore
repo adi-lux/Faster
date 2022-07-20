@@ -1,4 +1,5 @@
 node_modules/
-.estlintrc.js
-.eslintignore
 .vscode/
+.eslintrc.js
+.stylelintrc.json
+.eslintignore
