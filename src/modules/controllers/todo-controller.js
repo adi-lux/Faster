@@ -1,3 +1,5 @@
+
+
 const TodoController = (givenModel) => {
   const model = givenModel;
 
@@ -8,6 +10,7 @@ const TodoController = (givenModel) => {
   };
   const addTodo = (e) => {
     e.preventDefault();
+
     const properties = [
       e.target.form[0].value,
       e.target.form[1].value,

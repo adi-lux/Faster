@@ -1,3 +1,5 @@
+import format from 'date-fns/format';
+
 function TodoView(todoController) {
   const controller = todoController;
   const observerName = 'ToDo';
@@ -37,6 +39,7 @@ function TodoView(todoController) {
     const todoDueDate = document.createElement('input');
     todoDueDate.type = 'date';
     todoDueDate.className = 'add-todo-due-date';
+    todoDueDate.maxLength = 8;
 
     const todoPriority = document.createElement('input');
     todoPriority.type = 'number';
@@ -46,7 +49,7 @@ function TodoView(todoController) {
     todoPriority.max = 3;
     todoPriority.min = 1;
     todoPriority.maxLength = 1;
-    todoPriority.addEventListener('input', onInput)
+    todoPriority.addEventListener('input', onInput);
 
     const todoButton = document.createElement('input');
     todoButton.type = 'button';
@@ -89,8 +92,9 @@ function TodoView(todoController) {
 
     const todoDueDate = document.createElement('input');
     todoDueDate.type = 'date';
-    todoDueDate.value = editTodoDueDate;
+    todoDueDate.value = format(new Date(editTodoDueDate), 'MM/dd/yyyy');
     todoDueDate.className = 'edit-todo-due-date';
+    todoDueDate.maxLength = 8;
 
     const todoPriority = document.createElement('input');
     todoPriority.type = 'number';
@@ -99,7 +103,7 @@ function TodoView(todoController) {
     todoPriority.value = 1;
     todoPriority.max = 3;
     todoPriority.min = 1;
-    todoPriority.addEventListener('input', onInput)
+    todoPriority.addEventListener('input', onInput);
     if (editTodoPriority === '1') {
       todoPriority.style.backgroundColor = 'aquamarine';
     } else if (editTodoPriority === '2') {
@@ -144,23 +148,19 @@ function TodoView(todoController) {
     tdDescription.style.visibility = 'hidden';
 
     const tdDueDate = document.createElement('p');
-    tdDueDate.textContent = todoDueDate;
+    tdDueDate.textContent = format(new Date(todoDueDate), 'MM/dd/yyyy');
     tdDueDate.className = 'todo-due-date';
 
     const tdPriority = document.createElement('p');
     tdPriority.textContent = todoPriority;
     tdPriority.className = 'todo-priority';
     if (todoPriority === '1') {
-      tdPriority.style.backgroundColor = 'aquamarine'
+      tdPriority.style.backgroundColor = 'aquamarine';
+    } else if (todoPriority === '2') {
+      tdPriority.style.backgroundColor = 'rgb(255, 255, 205)';
+    } else {
+      tdPriority.style.backgroundColor = 'rgb(255, 139, 126)';
     }
-    else if (todoPriority === '2' ) {
-      tdPriority.style.backgroundColor = 'rgb(255, 255, 205)'
-    }
-    else {
-      tdPriority.style.backgroundColor = 'rgb(255, 139, 126)'
-    }
-
-    
 
     const expandTodoButton = document.createElement('input');
     expandTodoButton.type = 'button';

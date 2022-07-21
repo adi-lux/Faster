@@ -90,7 +90,65 @@ function Model() {
     curProj.editItem(toolType, name, parameters);
   };
 
+  const updateStorage = () => {
+    // First, looks for project "list".
+    //projectList = names of all the projects.
+    // puts that into storage
+    // projectList notes = names of all notes
+    // projectList notes name = name'd properties of each Note
+    // projectList todos = names of all todos in project
+    // projectList todos name = named properties of each ToDo
+    // const projList = localStorage.setItem('projectList', JSON.stringify(projectList.names))
+    // const noteList = localStorage.setItem('notes', JSON.stringify(noteList))
+
+    const originalProjectName = getCurrentProjectName()
+    const curItemList =  projectList.itemList
+    const curNameList = curItemList.map(project => project.name)
+    localStorage.setItem('projectList', JSON.stringify(curNameList))
+    const projNames = JSON.parse(localStorage.getItem('projectList'))
+    console.log(localStorage.getItem('projectList'));
+    projNames.forEach( (projectName) => {
+      switchProject(projectName)
+      const todoContainers = getCurrentProject().getTypeNameList('ToDo')
+      const nameList = todoContainers.itemList.map(item => item.name)
+      console.log(nameList);
+      localStorage.setItem('projectList todoList', JSON.stringify(nameList))
+      console.log(localStorage.getItem('projectList todoList'));
+      const todoPropertyList = JSON.parse(localStorage.getItem('projectList todoList'))
+      todoPropertyList.forEach(  (curTodo) => {
+        localStorage.setItem(`projectList todoList ${curTodo.name}`, JSON.stringify(curTodo));
+        console.log('321');
+      })
+
+      const noteContainers = getCurrentProject().getTypeNameList('Note')
+      const noteNameList = noteContainers.itemList.map(item => item.name)
+      console.log(noteNameList);
+      localStorage.setItem('projectList noteList', JSON.stringify(noteNameList))
+      console.log(localStorage.getItem('projectList noteList'));
+      const notePropertyList = JSON.parse(localStorage.getItem('projectList noteList'))
+      notePropertyList.forEach(  (curNote) => {
+        localStorage.setItem(`projectList noteList ${curNote.name}`, JSON.stringify(curTodo));
+        console.log('321');
+      })
+    })
+
+    switchProject(originalProjectName)
+
+  }
+
+  const populateStorage = () => {
+    // localStorage.getItem('projectList')
+    // JSON.parse that ^
+    // loop through it, access projectName Todos
+    // for each todo, generate an object using  the parameters
+    // loop through each note, access projectNote same way
+    //
+  }
+
+
   addProject();
+  updateStorage()
+
   return {
     get projects() {
       return projectList.itemList;
