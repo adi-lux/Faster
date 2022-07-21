@@ -165,14 +165,14 @@ function TodoView(todoController) {
     const expandTodoButton = document.createElement('input');
     expandTodoButton.type = 'button';
     expandTodoButton.className = 'expand-todo-button';
-    expandTodoButton.value = '+';
+    expandTodoButton.value = 'show';
 
     const shrinkTodoButton = document.createElement('input');
     shrinkTodoButton.type = 'button';
     shrinkTodoButton.className = 'shrink-todo-button';
     shrinkTodoButton.disabled = true;
     shrinkTodoButton.style.visibility = 'hidden';
-    shrinkTodoButton.value = '-';
+    shrinkTodoButton.value = 'hide';
 
     const editTodoButton = document.createElement('input');
     editTodoButton.type = 'button';
