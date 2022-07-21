@@ -3,28 +3,55 @@ function TodoView(todoController) {
   const observerName = 'ToDo';
 
   const getParentTodo = (e) => e.target.parentElement;
-  const getTodoContents = (e, index) => getParentTodo(e).children[index].textContent;
+  const getTodoContents = (e, index) =>
+    getParentTodo(e).children[index].textContent;
 
+  const onInput = (e) => {
+    const newPriority = e.target.value;
+    console.log(newPriority);
+    if (newPriority === '1') {
+      e.target.style.backgroundColor = 'aquamarine';
+    } else if (newPriority === '2') {
+      e.target.style.backgroundColor = 'rgb(255, 255, 205)';
+    } else {
+      e.target.style.backgroundColor = 'rgb(255, 139, 126)';
+    }
+  };
   const addTodoView = () => {
+    const originalAddButton = document.querySelector('.add-todo-button');
+    originalAddButton.disabled = true;
+
     const todoWindow = document.createElement('div');
     todoWindow.className = 'add-todo-window';
     const todoForm = document.createElement('form');
+    todoForm.className = 'add-todo-form';
 
     const todoName = document.createElement('input');
     todoName.type = 'text';
-
-    const todoContent = document.createElement('input');
-    todoContent.type = 'text';
+    todoName.className = 'add-todo-name';
+    todoName.placeholder = 'Bob Jones';
+    const todoContent = document.createElement('textarea');
+    todoContent.className = 'add-todo-content';
+    todoContent.placeholder = 'placeholder description';
 
     const todoDueDate = document.createElement('input');
     todoDueDate.type = 'date';
+    todoDueDate.className = 'add-todo-due-date';
 
     const todoPriority = document.createElement('input');
     todoPriority.type = 'number';
+    todoPriority.className = 'add-todo-priority';
+    todoPriority.style.backgroundColor = 'aquamarine';
+    todoPriority.value = 1;
+    todoPriority.max = 3;
+    todoPriority.min = 1;
+    todoPriority.maxLength = 1;
+    todoPriority.addEventListener('input', onInput)
 
     const todoButton = document.createElement('input');
     todoButton.type = 'button';
     todoButton.value = 'Add';
+    todoButton.className = 'true-add-todo-button';
 
     todoButton.addEventListener('click', controller.addTodo);
     todoForm.appendChild(todoName);
@@ -43,31 +70,47 @@ function TodoView(todoController) {
     const editTodoContent = getTodoContents(e, 1);
     const editTodoDueDate = getTodoContents(e, 2);
     const editTodoPriority = getTodoContents(e, 3);
+    const backButton = document.querySelector('.todo');
+    backButton.style.visibility = 'hidden';
 
     const todoWindow = document.createElement('div');
     todoWindow.className = 'edit-todo-window';
     const todoForm = document.createElement('form');
+    todoForm.className = 'edit-todo-form';
 
     const todoName = document.createElement('input');
     todoName.type = 'text';
     todoName.value = editTodoName;
+    todoName.className = 'edit-todo-name';
 
-    const todoContent = document.createElement('input');
-    todoContent.type = 'text';
+    const todoContent = document.createElement('textarea');
     todoContent.value = editTodoContent;
+    todoContent.className = 'edit-todo-content';
 
     const todoDueDate = document.createElement('input');
     todoDueDate.type = 'date';
     todoDueDate.value = editTodoDueDate;
+    todoDueDate.className = 'edit-todo-due-date';
 
     const todoPriority = document.createElement('input');
     todoPriority.type = 'number';
     todoPriority.value = editTodoPriority;
-
+    todoPriority.className = 'edit-todo-priority';
+    todoPriority.value = 1;
+    todoPriority.max = 3;
+    todoPriority.min = 1;
+    todoPriority.addEventListener('input', onInput)
+    if (editTodoPriority === '1') {
+      todoPriority.style.backgroundColor = 'aquamarine';
+    } else if (editTodoPriority === '2') {
+      todoPriority.style.backgroundColor = 'rgb(255, 255, 205)';
+    } else {
+      todoPriority.style.backgroundColor = 'rgb(255, 139, 126)';
+    }
     const todoButton = document.createElement('input');
     todoButton.type = 'button';
     todoButton.value = 'edit';
-    todoButton.className = 'trueToDoEditButton';
+    todoButton.className = 'true-todo-edit-button';
 
     const hiddenOriginal = document.createElement('input');
     hiddenOriginal.type = 'hidden';
@@ -81,44 +124,55 @@ function TodoView(todoController) {
     todoForm.appendChild(todoButton);
     todoForm.appendChild(hiddenOriginal);
     todoWindow.appendChild(todoForm);
+    todoForm.style.visibility = 'visible';
     getParentTodo(e).replaceChildren(todoForm);
   };
 
   const holderGenerator = (parameters) => {
     const [todoName, todoDescription, todoDueDate, todoPriority] = parameters;
-    let visibility;
-    if (document.querySelector('.expand-todo-button') !== null) {
-      visibility = 'visible';
-    } else if (document.querySelector('.shrink-todo-button') !== null) {
-      visibility = 'hidden';
-    } else {
-      visibility = 'hidden';
-    }
 
     const tdHolder = document.createElement('form');
     tdHolder.className = 'todo';
     const tdNameHeader = document.createElement('h3');
     tdNameHeader.textContent = todoName;
+    tdNameHeader.placeholder = 'Bob Jones';
+    tdNameHeader.className = 'todo-view-name';
 
     const tdDescription = document.createElement('p');
     tdDescription.textContent = todoDescription;
     tdDescription.className = 'todo-description';
-    tdDescription.style.visibility = visibility;
+    tdDescription.style.visibility = 'hidden';
 
     const tdDueDate = document.createElement('p');
     tdDueDate.textContent = todoDueDate;
+    tdDueDate.className = 'todo-due-date';
 
     const tdPriority = document.createElement('p');
     tdPriority.textContent = todoPriority;
+    tdPriority.className = 'todo-priority';
+    if (todoPriority === '1') {
+      tdPriority.style.backgroundColor = 'aquamarine'
+    }
+    else if (todoPriority === '2' ) {
+      tdPriority.style.backgroundColor = 'rgb(255, 255, 205)'
+    }
+    else {
+      tdPriority.style.backgroundColor = 'rgb(255, 139, 126)'
+    }
+
+    
 
     const expandTodoButton = document.createElement('input');
     expandTodoButton.type = 'button';
-    if (visibility === 'hidden') {
-      expandTodoButton.className = 'expand-todo-button';
-    } else {
-      expandTodoButton.className = 'shrink-todo-button';
-    }
-    expandTodoButton.value = '...';
+    expandTodoButton.className = 'expand-todo-button';
+    expandTodoButton.value = '+';
+
+    const shrinkTodoButton = document.createElement('input');
+    shrinkTodoButton.type = 'button';
+    shrinkTodoButton.className = 'shrink-todo-button';
+    shrinkTodoButton.disabled = true;
+    shrinkTodoButton.style.visibility = 'hidden';
+    shrinkTodoButton.value = '-';
 
     const editTodoButton = document.createElement('input');
     editTodoButton.type = 'button';
@@ -135,39 +189,33 @@ function TodoView(todoController) {
     tdHolder.appendChild(tdDueDate);
     tdHolder.appendChild(tdPriority);
     tdHolder.appendChild(expandTodoButton);
+    tdHolder.appendChild(shrinkTodoButton);
     tdHolder.appendChild(editTodoButton);
     tdHolder.appendChild(deleteTodoButton);
     return tdHolder.cloneNode(true);
   };
 
   const shrinkTodoView = (e) => {
-    const todoName = getTodoContents(e, 0);
-    const todoDescription = getTodoContents(e, 1);
-    const todoDueDate = getTodoContents(e, 2);
-    const todoPriority = getTodoContents(e, 3);
+    const todoDescription = document.querySelector('.todo-description');
+    todoDescription.style.visibility = 'hidden';
+    const expandButton = document.querySelector('.expand-todo-button');
+    expandButton.style.visibility = 'visible';
+    expandButton.disabled = false;
 
-    const tdHolder = holderGenerator([
-      todoName,
-      todoDescription,
-      todoDueDate,
-      todoPriority,
-    ]);
-    getParentTodo(e).replaceChildren(tdHolder);
+    e.target.style.visibility = 'hidden';
+    e.target.disabled = true;
     updateEventHandlers();
   };
   const expandTodoView = (e) => {
-    const todoName = getTodoContents(e, 0);
-    const todoDescription = getTodoContents(e, 1);
-    const todoDueDate = getTodoContents(e, 2);
-    const todoPriority = getTodoContents(e, 3);
+    const todoDescription = document.querySelector('.todo-description');
+    console.log(todoDescription);
+    todoDescription.style.visibility = 'visible';
+    const shrinkButton = document.querySelector('.shrink-todo-button');
+    shrinkButton.style.visibility = 'visible';
+    shrinkButton.disabled = false;
 
-    const tdHolder = holderGenerator([
-      todoName,
-      todoDescription,
-      todoDueDate,
-      todoPriority,
-    ]);
-    getParentTodo(e).replaceChildren(tdHolder);
+    e.target.style.visibility = 'hidden';
+    e.target.disabled = true;
     updateEventHandlers();
   };
 
@@ -176,8 +224,12 @@ function TodoView(todoController) {
     const deleteButtons = document.querySelectorAll('.delete-todo-button');
     const expandButtons = document.querySelectorAll('.expand-todo-button');
     const shrinkButtons = document.querySelectorAll('.shrink-todo-button');
-    deleteButtons.forEach((button) => button.addEventListener('click', controller.deleteTodo));
-    editButtons.forEach((button) => button.addEventListener('click', editTodoView));
+    deleteButtons.forEach((button) =>
+      button.addEventListener('click', controller.deleteTodo)
+    );
+    editButtons.forEach((button) =>
+      button.addEventListener('click', editTodoView)
+    );
     expandButtons.forEach((button) => {
       button.addEventListener('click', expandTodoView);
     });
