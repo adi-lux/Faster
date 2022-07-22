@@ -294,7 +294,12 @@ function Model() {
     initializing = false;
   };
 
-  populateStorage();
+  try {
+    populateStorage();
+  }
+  catch {
+    addProject();
+  }
 
   return {
     get projects() {
