@@ -287,7 +287,12 @@ function Model() {
           });
         }
       });
-      switchProject(originalCurrentName);
+      if (originalCurrentName !== 'null') {
+        switchProject(originalCurrentName) 
+      }
+      else {
+        localStorage.setItem('originalName', 'Project 0')
+      }
     } else {
       addProject();
     }
