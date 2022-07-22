@@ -25,7 +25,7 @@ function ProjectsView(projectController) {
     hiddenOriginal.value = editProjectName;
 
     projName.addEventListener('keydown', controller.editProjectName);
-    projName.addEventListener('focusout', controller.editProjectName);
+    //projName.addEventListener('focusout', controller.editProjectName);
     projForm.appendChild(projName);
     projForm.appendChild(hiddenOriginal);
     projectWindow.appendChild(projForm);

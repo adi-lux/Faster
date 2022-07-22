@@ -17,7 +17,7 @@ const ProjectController = (givenModel) => {
     if (e.target.size < 16) {
       e.target.size = e.target.form[0].value.length;
     }
-    if (e.key === 'Enter' || e.key === undefined) {
+    if (e.key === 'Enter') {
       e.preventDefault();
       const newName = e.target.form[0].value;
       const oldName = e.target.form[1].value;

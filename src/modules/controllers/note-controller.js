@@ -9,12 +9,18 @@ const NoteController = (givenModel) => {
   const addNote = (e) => {
     e.preventDefault();
     const properties = [e.target.form[0].value, e.target.form[1].value];
+    if (e.target.form[0].value.length === 0 || e.target.form[1].value.length === 0) {
+      return
+    }
     model.addTool('Note', properties);
     updateModel();
   };
   const editNote = (e) => {
     const properties = [e.target.form[0].value, e.target.form[1].value];
     const noteName = e.target.form[3].value;
+    if (e.target.form[0].value.length === 0 || e.target.form[1].value.length === 0) {
+      return
+    }
     model.editTool('Note', noteName, properties);
     updateModel();
   };

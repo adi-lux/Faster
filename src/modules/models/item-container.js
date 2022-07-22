@@ -16,6 +16,9 @@ const ItemContainer = (kind) => {
   };
   const getItemByName = (name) => {
     const itemIndex = getItemIndexByName(name);
+    console.log(name);
+    console.log(itemIndex);
+    console.log(itemList);
     return itemList[itemIndex];
   };
 
@@ -34,6 +37,9 @@ const ItemContainer = (kind) => {
     },
     get length() {
       return itemList.length;
+    },
+    get itemNameList() {
+      return itemList.map(item => item.name)
     },
     addItem,
     removeItem,

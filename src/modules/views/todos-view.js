@@ -145,7 +145,7 @@ function TodoView(todoController) {
     const tdDescription = document.createElement('p');
     tdDescription.textContent = todoDescription;
     tdDescription.className = 'todo-description';
-    tdDescription.style.visibility = 'hidden';
+    //tdDescription.style.visibility = 'hidden';
 
     const tdDueDate = document.createElement('p');
     tdDueDate.textContent = format(new Date(todoDueDate), 'MM/dd/yyyy');
@@ -162,17 +162,17 @@ function TodoView(todoController) {
       tdPriority.style.backgroundColor = 'rgb(255, 139, 126)';
     }
 
-    const expandTodoButton = document.createElement('input');
-    expandTodoButton.type = 'button';
-    expandTodoButton.className = 'expand-todo-button';
-    expandTodoButton.value = 'show';
+    // const expandTodoButton = document.createElement('input');
+    // expandTodoButton.type = 'button';
+    // expandTodoButton.className = 'expand-todo-button';
+    // //expandTodoButton.value = 'show';
 
-    const shrinkTodoButton = document.createElement('input');
-    shrinkTodoButton.type = 'button';
-    shrinkTodoButton.className = 'shrink-todo-button';
-    shrinkTodoButton.disabled = true;
-    shrinkTodoButton.style.visibility = 'hidden';
-    shrinkTodoButton.value = 'hide';
+    // const shrinkTodoButton = document.createElement('input');
+    // shrinkTodoButton.type = 'button';
+    // shrinkTodoButton.className = 'shrink-todo-button';
+    // shrinkTodoButton.disabled = true;
+    // shrinkTodoButton.style.visibility = 'hidden';
+    // shrinkTodoButton.value = 'hide';
 
     const editTodoButton = document.createElement('input');
     editTodoButton.type = 'button';
@@ -188,54 +188,54 @@ function TodoView(todoController) {
     tdHolder.appendChild(tdDescription);
     tdHolder.appendChild(tdDueDate);
     tdHolder.appendChild(tdPriority);
-    tdHolder.appendChild(expandTodoButton);
-    tdHolder.appendChild(shrinkTodoButton);
+    //tdHolder.appendChild(expandTodoButton);
+    //tdHolder.appendChild(shrinkTodoButton);
     tdHolder.appendChild(editTodoButton);
     tdHolder.appendChild(deleteTodoButton);
     return tdHolder.cloneNode(true);
   };
 
-  const shrinkTodoView = (e) => {
-    const todoDescription = document.querySelector('.todo-description');
-    todoDescription.style.visibility = 'hidden';
-    const expandButton = document.querySelector('.expand-todo-button');
-    expandButton.style.visibility = 'visible';
-    expandButton.disabled = false;
+  // const shrinkTodoView = (e) => {
+  //   const todoDescription = document.querySelector('.todo-description');
+  //   todoDescription.style.visibility = 'hidden';
+  //  // const expandButton = document.querySelector('.expand-todo-button');
+  //  // expandButton.style.visibility = 'visible';
+  //   //expandButton.disabled = false;
 
-    e.target.style.visibility = 'hidden';
-    e.target.disabled = true;
-    updateEventHandlers();
-  };
-  const expandTodoView = (e) => {
-    const todoDescription = document.querySelector('.todo-description');
-    console.log(todoDescription);
-    todoDescription.style.visibility = 'visible';
-    const shrinkButton = document.querySelector('.shrink-todo-button');
-    shrinkButton.style.visibility = 'visible';
-    shrinkButton.disabled = false;
+  //   e.target.style.visibility = 'hidden';
+  //   e.target.disabled = true;
+  //   updateEventHandlers();
+  // };
+  // const expandTodoView = (e) => {
+  //   const todoDescription = document.querySelector('.todo-description');
+  //   console.log(todoDescription);
+  //   todoDescription.style.visibility = 'visible';
+  //   const shrinkButton = document.querySelector('.shrink-todo-button');
+  //   shrinkButton.style.visibility = 'visible';
+  //   shrinkButton.disabled = false;
 
-    e.target.style.visibility = 'hidden';
-    e.target.disabled = true;
-    updateEventHandlers();
-  };
+  //   e.target.style.visibiformatlity = 'hidden';
+  //   e.target.disabled = true;
+  //   updateEventHandlers();
+  // };
 
   const updateEventHandlers = () => {
     const editButtons = document.querySelectorAll('.edit-todo-button');
     const deleteButtons = document.querySelectorAll('.delete-todo-button');
-    const expandButtons = document.querySelectorAll('.expand-todo-button');
-    const shrinkButtons = document.querySelectorAll('.shrink-todo-button');
+    //const expandButtons = document.querySelectorAll('.expand-todo-button');
+   // const shrinkButtons = document.querySelectorAll('.shrink-todo-button');
     deleteButtons.forEach((button) =>
       button.addEventListener('click', controller.deleteTodo)
     );
     editButtons.forEach((button) =>
       button.addEventListener('click', editTodoView)
     );
-    expandButtons.forEach((button) => {
-      button.addEventListener('click', expandTodoView);
-    });
-    shrinkButtons.forEach((button) => {
-      button.addEventListener('click', shrinkTodoView);
-    });
+    // expandButtons.forEach((button) => {
+    //   button.addEventListener('click', expandTodoView);
+    // });
+    // shrinkButtons.forEach((button) => {
+    //   button.addEventListener('click', shrinkTodoView);
+    // });
     const todoButton = document.querySelector('button.add-todo-button');
     todoButton.addEventListener('click', addTodoView);
   };
